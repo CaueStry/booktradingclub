@@ -32,8 +32,8 @@ main {
     top: 0;
     left: 0;
     background-color: #FFF;
-    width: 300px;
-    height: 200px;
+    width: inherit;
+    height: inherit;
     border-radius: 10px;
     opacity: 0.95;
     box-shadow: 0 0 15px #000;
@@ -48,8 +48,8 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-around;    
-    width: 300px;
-    height: 200px;
+    width: inherit;
+    height: inherit;
 }
 
 #login-buttons-container {
@@ -59,12 +59,13 @@ main {
 }
 
 .page-title {
+    font-family: 'Dosis', cursive;
     width: 100%;
     height: 1em;
     position: absolute;
     top: 100px;
     display: block;
-    font-size: 3em;
+    font-size: 4em;
     text-align: center;
     color: #FFF;
     margin: auto;
@@ -81,14 +82,17 @@ main {
     display: inline-block;
     font-size: 16px;
     width: 120px;
+    box-shadow: 0 0 3px #888;
 }
 
 .login-button:hover {
+    cursor: pointer;
     background-color: #CCC;
 }
 
 .login-button:active {
     background-color: #AAA;
+    box-shadow: 0 0 1px #888;
 }
 
 .login-button:focus {
@@ -97,6 +101,7 @@ main {
 
 .login-field {
     height: 25px;
+    padding: 5px;
     font-size: 1.2em;
 }
 
