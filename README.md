@@ -1,6 +1,6 @@
 # Book Trading club
 
-TODO: Description
+A book trading website developed as a project for the class Database Systems at Langara College.
 
 ## Built With
 
@@ -11,4 +11,6 @@ TODO: Description
 
 ## Authors
 
-* **TODO**
+* Caue Pinheiro
+* Elian Figueiredo
+* Artyom Lunyakin
