@@ -17,3 +17,18 @@ body {
 .card {
   height: 100%;
 }
+
+.jumbotron {
+  background-image: url("../images/books_black_white.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+}
+
+.display-3, .lead {
+    color: #FFFFFF;
+    text-shadow: 2px 2px #000000;
+}
+.lead {
+  font-size: 1.5em;
+}
