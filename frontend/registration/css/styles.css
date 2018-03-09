@@ -22,9 +22,9 @@ main {
     display: block;
     box-sizing: border-box;
     width: 350px;
-    height: 250px;
+    height: 500px;
     margin: auto;
-    margin-top: calc(50vh - 100px);
+    margin-top: 150px;
 }
 
 #login-box {
@@ -47,7 +47,7 @@ main {
     box-sizing: border-box;    
     display: flex;
     flex-direction: column;
-    justify-content: space-around;    
+    justify-content: space-between;    
     width: inherit;
     height: inherit;
 }
@@ -58,14 +58,34 @@ main {
     justify-content: space-between;
 }
 
+#roles-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 .page-title {
     font-family: 'Dosis', cursive;
     width: 100%;
     height: 1em;
     position: absolute;
-    top: 100px;
+    top: 10px;
     display: block;
-    font-size: 4em;
+    font-size: 3em;
+    text-align: center;
+    color: #FFF;
+    margin: auto;
+    text-shadow: 0 0 5px #000;
+}
+
+.page-subtitle {
+    font-family: 'Dosis', cursive;
+    width: 100%;
+    height: 1em;
+    position: absolute;
+    top: 70px;
+    display: block;
+    font-size: 2.5em;
     text-align: center;
     color: #FFF;
     margin: auto;
