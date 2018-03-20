@@ -56,27 +56,27 @@
 
       <!-- Jumbotron Header -->
       <header class="jumbotron my-4">
-        <h1 class="display-3">My Books</h1>
-        <p class="lead">Here you can update or delete books uploaded by you.</p>
-        <a href="upload_book.html" class="btn btn-primary btn-lg">Upload Book</a>
+        <h1 class="display-3">Upload Books</h1>
+        <p class="lead">Fill in required information to make your book available for trade.</p>
       </header>
 
       <!-- Page Features -->
-      <div class="row text-center">
-        <div class="col-lg-3 col-md-6 mb-4">
-          <div class="card">
-            <img class="card-img-top" src="http://www-fp.pearsonhighered.com/assets/hip/images/bigcovers/0134322754.jpg" alt="">
-            <div class="card-body">
-              <h4 class="card-title">CPSC 1030</h4>
-              <p class="card-text">Web Development & Design Foundations With HTML5<br>
-                By: Terry Felke-Morris
-              </p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Update</a>
-              <a href="#" class="btn btn-primary">Delete</a>
-            </div>
-          </div>
+      <div class="rowup text-center">
+        <div id="login-container">
+            <div id="login-box"></div>
+            <form id="login-form" action="#">
+                <input class="login-field" type="number" name="ownerlangaraid" placeholder="Langara ID">
+                <input class="login-field" type="number" name="isbn" placeholder="ISNB13" required>
+                <input class="login-field" type="text" name="title" placeholder="Book Title" required>
+                <input class="login-field" type="text" name="edition" placeholder="Book Edition">
+                <input class="login-field" type="text" name="author" placeholder="Book Author">
+                <input class="login-field" type="text" name="condition" placeholder="New/Used">
+                <input class="login-field" type="number" name="price" placeholder="Price">
+                <input class="login-field" type="text" name="coverurl" placeholder="Cover URL">
+                <div id="login-buttons-container">
+                    <input class="btn btn-primary btn-lg" type="button" name="upload" value="Upload" onclick="uploadBook()">
+                </div>
+            </form>
         </div>
       </div>
       <!-- /.row 1 -->

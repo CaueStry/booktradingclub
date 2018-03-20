@@ -22,7 +22,6 @@ body {
   background-image: url("../images/books_black_white.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  opacity: 0.5;
 }
 
 .display-3, .lead {
@@ -31,4 +30,56 @@ body {
 }
 .lead {
   font-size: 1.5em;
+}
+
+.rowup {
+  margin-top: -8em;
+  margin-bottom: 1em;
+}
+
+#login-container {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    width: 350px;
+    height: 500px;
+    margin: auto;
+    margin-top: 150px;
+}
+
+#login-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #FFF;
+    width: inherit;
+    height: inherit;
+    border-radius: 10px;
+    opacity: 0.95;
+    box-shadow: 0 0 15px #000;
+}
+
+#login-form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: inherit;
+    height: inherit;
+}
+
+#login-buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#roles-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
