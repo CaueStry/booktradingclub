@@ -1,4 +1,6 @@
 module.exports = {
+
+    // User Registration
     registerUser: function(con, user) {
         con.query(`
             INSERT INTO SYS_User VALUES (
@@ -30,12 +32,11 @@ module.exports = {
                     if(err) throw err;
             });
         }
-    }
-}
-module.exports = {
-    //Upload book
+    },
+
+    // Book Registration
     uploadBook: function(con, book) {
-        //Insert into book table
+        // Insert Book Copy
         con.query(`
             INSERT INTO book VALUES (
                 ${book.isbn},
@@ -48,7 +49,7 @@ module.exports = {
         `, function(err, result) {
             if(err) throw err;
         });
-        //insert into book_copy table
+        // Insert Owned Copy
         con.query(`
             INSERT INTO owned_copy(owner_langara_id, book_id, book_condition, book_price, user_image_url) VALUES (
               ${book.ownerLangaraId},
