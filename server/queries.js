@@ -3,19 +3,18 @@ module.exports = {
     // User Registration
     registerUser: function(con, user) {
         con.query(`
-            INSERT INTO SYS_User VALUES (
+            INSERT INTO SYS_User(langara_id, first_name, last_name, address, email, password) VALUES (
                 ${user.langaraid},
                 '${user.firstName}',
                 '${user.lastName}',
                 '${user.address}',
-                '${user.role}',
                 '${user.email}',
                 '${user.password}'
             );
         `, function(err, result) {
             if(err) throw err;
         });
-        if(user.role == "student") {
+        if(user.type == "student") {
             con.query(`
                 INSERT INTO Student(langara_id) VALUES (
                     ${user.langaraid}
@@ -23,7 +22,7 @@ module.exports = {
             `, function(err, result) {
                 if(err) throw err;
             });
-        } else if(user.role == "staff") {
+        } else if(user.type == "staff") {
             con.query(`
             INSERT INTO Staff(langara_id) VALUES (
                 ${user.langaraid}
@@ -38,7 +37,7 @@ module.exports = {
     uploadBook: function(con, book) {
         // Insert Book Copy
         con.query(`
-            INSERT INTO book VALUES (
+            INSERT INTO Book VALUES (
                 ${book.isbn},
                 '${book.title}',
                 '${book.edition}',

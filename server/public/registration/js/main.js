@@ -7,7 +7,7 @@ function submitRegistration() {
         langaraid: form.langaraid.value,
         address: form.address.value,
         password: form.password.value,
-        role: form.role.value
+        type: form.type.value
     }
 
     $.ajax({
