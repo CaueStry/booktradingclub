@@ -8,7 +8,7 @@ module.exports = {
                 '${user.address}',
                 '${user.role}',
                 '${user.email}',
-                '${user.password}'                
+                '${user.password}'
             );
         `, function(err, result) {
             if(err) throw err;
@@ -30,5 +30,35 @@ module.exports = {
                     if(err) throw err;
             });
         }
+    }
+}
+module.exports = {
+    //Upload book
+    uploadBook: function(con, book) {
+        //Insert into book table
+        con.query(`
+            INSERT INTO book VALUES (
+                ${book.isbn},
+                '${book.title}',
+                '${book.edition}',
+                '${book.author}',
+                '${book.coverUrl}',
+                '${book.description}'
+            );
+        `, function(err, result) {
+            if(err) throw err;
+        });
+        //insert into book_copy table
+        con.query(`
+            INSERT INTO owned_copy(owner_langara_id, book_id, book_condition, book_price, user_image_url) VALUES (
+              ${book.ownerLangaraId},
+              ${book.isbn},
+              '${book.copyCondition}',
+              ${book.copyPrice},
+              '${book.coverUrl}'
+            );
+        `, function(err, result) {
+            if(err) throw err;
+        });
     }
 }
