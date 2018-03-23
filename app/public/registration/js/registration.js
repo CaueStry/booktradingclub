@@ -5,7 +5,6 @@ function submitRegistration() {
         firstName: form.firstname.value,
         lastName: form.lastname.value,
         langaraid: form.langaraid.value,
-        address: form.address.value,
         password: form.password.value,
         type: form.type.value
     }
