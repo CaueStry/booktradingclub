@@ -29,16 +29,27 @@ app.use("/dashboard", express.static(path.join(__dirname, "public", "dashboard")
 
 // AJAX Handlers
 app.post("/register", function(req, res) {
-    queries.registerUser(con, req.body);
-    res.status(200);
+    try {
+        queries.registerUser(con, req.body);
+        res.status(200);
+    } catch(e) {
+        console.log(e);
+        res.status(500);
+    }
     res.send();
 });
 
 app.post("/dashboard", function(req, res) {
-    queries.uploadBook(con, req.body);
-    res.status(200);
+    try {
+        queries.uploadBook(con, req.body);
+        res.status(200);
+    } catch (e) {
+        console.log(e);
+        res.status(500);
+    }
     res.send();
 });
 
 // Listener
+console.log("Listening on port 3000...");
 app.listen(3000);
