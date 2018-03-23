@@ -26,13 +26,18 @@ con.connect(function(err) {
 });
 
 // Paths
-app.use("/", express.static(path.join(__dirname, "public", "login")));
+app.use("/login", express.static(path.join(__dirname, "public", "login")));
 app.use("/register", express.static(path.join(__dirname, "public", "registration")));
 app.use("/dashboard", express.static(path.join(__dirname, "public", "dashboard")));
 
 //Routing
 app.get("/", function(req, res) {
     sess = req.session;
+    if(!sess) {
+        res.redirect("/login");
+    } else {
+        res.redirect("/dashboard");
+    }
 });
 
 // AJAX Handlers
