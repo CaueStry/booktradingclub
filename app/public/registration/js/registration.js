@@ -16,7 +16,7 @@ function submitRegistration() {
         contentType: "application/json",
         data: JSON.stringify(user),
         success: function(data, textStatus, xhr) {
-            console.log(`Status: ${xhr.status}`);
+            window.location.href="/login";
         },
         error: function(xhr, textStatus, errorThrown) {
             console.log(`Status: ${xhr.status}`);

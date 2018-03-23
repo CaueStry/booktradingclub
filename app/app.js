@@ -11,6 +11,13 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
+app.use(session({
+    secret: "cpsc2221",
+    name: "booktradingclub",
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+}));
 var sess;
 
 // Database Connection
@@ -33,21 +40,30 @@ app.use("/dashboard", express.static(path.join(__dirname, "public", "dashboard")
 //Routing
 app.get("/", function(req, res) {
     sess = req.session;
-    if(!sess) {
-        res.redirect("/login");
-    } else {
+    if(sess.email) {
         res.redirect("/dashboard");
+    } else {
+        res.redirect("/login");
     }
+});
+
+app.post("/login", function(req, res) {
+    sess = req.session;
+    sess.email = req.body.email;
+    res.status(200);
+    res.send();
 });
 
 // AJAX Handlers
 app.post("/register", function(req, res) {
     try {
         queries.registerUser(con, req.body);
-        res.status(200);
+        sess = req.session;
+        sess.email = req.body.email;
+        res.redirect("/dashboard");
     } catch(e) {
         console.log(e);
-        res.status(500);
+        res.status(500).send("500 Internal Error");
     }
     res.send();
 });
@@ -55,12 +71,22 @@ app.post("/register", function(req, res) {
 app.post("/dashboard", function(req, res) {
     try {
         queries.uploadBook(con, req.body);
-        res.status(200);
+        res.send("OK");
     } catch (e) {
         console.log(e);
-        res.status(500);
+        res.status(500).send("500 Internal Error");
     }
-    res.send();
+});
+
+app.get("/logout", function(req, res) {
+    req.session.destroy(function(err) {
+        if(err) {
+            console.log(err);
+            res.status(500).send("500 Internal Error");
+        } else {
+            res.redirect("/login");
+        }
+    });
 });
 
 // Listener
