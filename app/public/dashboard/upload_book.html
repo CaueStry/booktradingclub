@@ -65,7 +65,7 @@
       <div class="rowup text-center">
         <div id="login-container">
             <div id="login-box"></div>
-            <form id="login-form" action="#">
+            <form id="login-form" onsubmit="uploadBook()">
                 <input class="login-field" type="number" name="ownerlangaraid" placeholder="Langara ID">
                 <input class="login-field" type="number" name="isbn" placeholder="ISNB13" required>
                 <input class="login-field" type="text" name="title" placeholder="Book Title" required>
@@ -76,7 +76,7 @@
                 <input class="login-field" type="text" name="coverurl" placeholder="Cover URL">
                 <input class="login-field" type="text" name="description" placeholder="Book Description">
                 <div id="login-buttons-container">
-                    <input class="btn btn-primary btn-lg" type="button" name="upload" value="Upload" onclick="uploadBook()">
+                    <input class="btn btn-primary btn-lg" type="submit" name="upload" value="Upload">
                 </div>
             </form>
         </div>

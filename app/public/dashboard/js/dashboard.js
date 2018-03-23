@@ -20,9 +20,13 @@ function uploadBook() {
         data: JSON.stringify(book),
         success: function(data, textStatus, xhr) {
             console.log(`Status: ${xhr.status}`);
+            if (xhr.status == 200) {
+              alert("Book uploaded successfully!");
+            }
         },
         error: function(xhr, textStatus, errorThrown) {
             console.log(`Status: ${xhr.status}`);
+            alert("Upload book failed! Error: " + xhr.status);
         }
     });
 }
