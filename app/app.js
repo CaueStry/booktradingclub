@@ -48,10 +48,13 @@ app.get("/", function(req, res) {
 });
 
 app.post("/login", function(req, res) {
-    sess = req.session;
-    sess.email = req.body.email;
-    res.status(200);
-    res.send();
+    if(queries.requestLogin(con, req.body)) {
+        sess = req.session;
+        sess.email = req.body.email;
+        res.status(200).send("OK");
+    } else {
+        res.status(400).send("Invalid Credentials");
+    }
 });
 
 // AJAX Handlers
