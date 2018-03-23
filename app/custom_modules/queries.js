@@ -36,9 +36,9 @@ module.exports = {
             });
         }
     },
+
     // Book Registration
     uploadBook: function(con, book) {
-        //Verify if book already exists
         con.query(`
           SELECT isbn13 FROM Book
               WHERE isbn13=
@@ -46,7 +46,7 @@ module.exports = {
           , function (err, result, fields) {
             if (err) throw err;
             if (result.length == 0) {
-              // Insert Book Copy
+              // Insert Book
               con.query(`
                   INSERT INTO Book VALUES (
                       ${book.isbn},
