@@ -1,3 +1,12 @@
+/*
+CREATE SCHEMA
+*/
+CREATE SCHEMA booktradingclub;
+/*
+SET SCHEMA AS DEFAULT
+*/
+USE booktradingclub;
+
 CREATE TABLE Roles (
 Role_ID CHAR(1),
 Role_Name CHAR(5),
@@ -11,9 +20,8 @@ CREATE TABLE SYS_User (
 langara_id INTEGER,
 first_name CHAR(50), 
 last_name CHAR(50), 
-address CHAR(255), 
 email CHAR(100) NOT NULL,
-password CHAR(255) NOT NULL,
+upassword CHAR(255) NOT NULL,
 salt CHAR(255) NOT NULL,
 role_id CHAR(1) DEFAULT 'U',
 PRIMARY KEY (langara_id),
@@ -52,8 +60,6 @@ isbn13 BIGINT,
 title CHAR(255),
 edition CHAR(50),
 author CHAR(100),
-cover_url CHAR(255),
-description CHAR(255),
 PRIMARY KEY (isbn13)
 );
 
@@ -65,6 +71,7 @@ requested_by_langara_id INTEGER,
 book_condition CHAR(20),
 book_price REAL,
 user_image_url CHAR(255),
+description CHAR(255),
 PRIMARY KEY (copy_id, owner_langara_id),
 FOREIGN KEY (owner_langara_id) REFERENCES SYS_User(langara_id)
 ON DELETE CASCADE,
