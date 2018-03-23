@@ -39,27 +39,40 @@ module.exports = {
 
     // Book Registration
     uploadBook: function(con, book) {
-        // Insert Book Copy
+      var existBook = false;
+        //Verify if book already exists
         con.query(`
-            INSERT INTO Book VALUES (
-                ${book.isbn},
-                '${book.title}',
-                '${book.edition}',
-                '${book.author}',
-                '${book.coverUrl}',
-                '${book.description}'
-            );
-        `, function(err, result) {
-            if(err) throw err;
+          SELECT isbn13 FROM Book
+              WHERE isbn13=
+              ${book.isbn}`
+          , function (err, result, fields) {
+          if (err) throw err;
+          if (result.length > 0) {
+            existBook = true;
+          }
         });
+        if (!existBook) {
+          // Insert Book Copy
+          con.query(`
+              INSERT INTO Book VALUES (
+                  ${book.isbn},
+                  '${book.title}',
+                  '${book.edition}',
+                  '${book.author}'
+              );
+          `, function(err, result) {
+              if(err) throw err;
+          });
+        }
         // Insert Owned Copy
         con.query(`
-            INSERT INTO owned_copy(owner_langara_id, book_id, book_condition, book_price, user_image_url) VALUES (
+            INSERT INTO owned_copy(owner_langara_id, book_id, book_condition, book_price, user_image_url, description) VALUES (
               ${book.ownerLangaraId},
               ${book.isbn},
               '${book.copyCondition}',
               ${book.copyPrice},
-              '${book.coverUrl}'
+              '${book.coverUrl}',
+              '${book.copyDescription}'
             );
         `, function(err, result) {
             if(err) throw err;

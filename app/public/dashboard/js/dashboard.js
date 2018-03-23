@@ -9,7 +9,7 @@ function uploadBook() {
         copyCondition: form.condition.value,
         copyPrice: form.price.value,
         coverUrl: form.coverurl.value,
-        description: form.description.value
+        copyDescription: form.description.value
     }
 
     $.ajax({
