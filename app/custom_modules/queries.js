@@ -7,7 +7,7 @@ module.exports = {
         var salt = this.hashing.generateSalt();
         var password = this.hashing.sha512(user.password, salt);
         con.query(`
-            INSERT INTO SYS_User(langara_id, first_name, last_name, email, password, salt) VALUES (
+            INSERT INTO SYS_User(langara_id, first_name, last_name, email, upassword, salt) VALUES (
                 ${user.langaraid},
                 '${user.firstName}',
                 '${user.lastName}',

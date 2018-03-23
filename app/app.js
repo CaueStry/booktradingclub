@@ -3,12 +3,15 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mysql = require("mysql");
 var path = require("path");
+var session = require("express-session");
 var queries = require("./custom_modules/queries.js");
 
 // Middleware
 var app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
+var sess;
 
 // Database Connection
 var con = mysql.createConnection({
@@ -22,10 +25,15 @@ con.connect(function(err) {
     if(err) throw err;
 });
 
-// Routing
+// Paths
 app.use("/", express.static(path.join(__dirname, "public", "login")));
 app.use("/register", express.static(path.join(__dirname, "public", "registration")));
 app.use("/dashboard", express.static(path.join(__dirname, "public", "dashboard")));
+
+//Routing
+app.get("/", function(req, res) {
+    sess = req.session;
+});
 
 // AJAX Handlers
 app.post("/register", function(req, res) {
@@ -51,5 +59,6 @@ app.post("/dashboard", function(req, res) {
 });
 
 // Listener
-console.log("Listening on port 3000...");
-app.listen(3000);
+app.listen(3000, function() {
+    console.log("Listening on port 3000...");
+});
