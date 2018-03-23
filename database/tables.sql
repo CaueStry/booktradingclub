@@ -14,6 +14,7 @@ last_name CHAR(50),
 address CHAR(255), 
 email CHAR(100) NOT NULL,
 password CHAR(255) NOT NULL,
+salt CHAR(255) NOT NULL,
 role_id CHAR(1) DEFAULT 'U',
 PRIMARY KEY (langara_id),
 FOREIGN KEY (role_id) REFERENCES Roles(Role_ID)
