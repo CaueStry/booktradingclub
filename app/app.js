@@ -1,6 +1,7 @@
 // Modules
 var express = require("express");
 var bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser");
 var mysql = require("mysql");
 var path = require("path");
 var session = require("express-session");
@@ -11,6 +12,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cookieParser());
 app.use(session({
     secret: "cpsc2221",
     name: "booktradingclub",
@@ -47,17 +49,35 @@ app.get("/", function(req, res) {
     }
 });
 
-app.post("/login", function(req, res) {
-    if(queries.requestLogin(con, req.body)) {
-        sess = req.session;
-        sess.email = req.body.email;
-        res.status(200).send("OK");
-    } else {
-        res.status(400).send("Invalid Credentials");
+app.get("/getSession", function(req, res) {
+    sess = req.session;
+    console.log(sess.email);
+    if(sess.email) {
+        res.status(200).send({
+            status: 200,
+            email: sess.email
+        });
     }
 });
 
-// AJAX Handlers
+app.post("/login", function(req, res) {
+    queries.authenticateLogin(con, req.body, function(result) {
+        if(result) {
+            sess = req.session;
+            sess.email = req.body.email;
+            res.status(200).jsonp({
+                status: 200,
+                redirect: "/dashboard"
+            });
+        } else {
+            res.status(400).jsonp({
+                status: 400,
+                redirect: "/login"
+            });
+        }
+    });
+});
+
 app.post("/register", function(req, res) {
     try {
         queries.registerUser(con, req.body);
@@ -74,7 +94,7 @@ app.post("/register", function(req, res) {
 app.post("/dashboard", function(req, res) {
     try {
         queries.uploadBook(con, req.body);
-        res.send("OK");
+        res.status(200).send("OK");
     } catch (e) {
         console.log(e);
         res.status(500).send("500 Internal Error");

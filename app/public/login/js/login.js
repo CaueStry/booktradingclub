@@ -7,12 +7,14 @@ function submitLogin() {
 
     $.ajax({
         url: "/login",
-        dataType: "json",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(user),
+        success: function(data, textStatus, xhr) {
+            window.location = data.redirect;
+        },
         error: function(xhr, textStatus, errorThrown) {
-            console.log(`Error: Status ${xhr.status}`);
+            alert("Invalid Credentials");
         }
     });
 }

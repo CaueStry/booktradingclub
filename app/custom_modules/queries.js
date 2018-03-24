@@ -1,11 +1,11 @@
-module.exports = {
+var hashing = require("./hashing.js");
 
-    hashing: require("./hashing.js"),
+module.exports = {
 
     // User Registration
     registerUser: function(con, user) {
-        var salt = this.hashing.generateSalt();
-        var password = this.hashing.sha512(user.password, salt);
+        var salt = hashing.generateSalt();
+        var password = hashing.sha512(user.password, salt);
         con.query(`
             INSERT INTO SYS_User(langara_id, first_name, last_name, email, upassword, salt) VALUES (
                 ${user.langaraid},
@@ -73,5 +73,28 @@ module.exports = {
             });
 
         });
+    },
+
+    // Login Authentication
+    authenticateLogin: function(con, user, callback) {
+        con.query(`
+        SELECT email FROM SYS_User
+            WHERE email='${user.email}';
+        `, function (err, result, fields) {
+          if (err) throw err;
+          if (result.length > 0) {
+            con.query(`
+            SELECT email, upassword, salt FROM SYS_User
+            WHERE email = '${user.email}';
+            `, function(err, result, fields) {
+                var inputPassword = hashing.sha512(user.password, result[0].salt);                             
+                if(inputPassword == result[0].upassword) {
+                    callback(true);
+                } else {
+                    callback(false);
+                }
+            });
+          }
+      });
     }
 }

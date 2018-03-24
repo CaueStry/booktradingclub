@@ -15,6 +15,9 @@ function submitRegistration() {
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(user),
+        success: function(data, textStatus, xhr) {
+            window.location = "/dashboard";
+        },
         error: function(xhr, textStatus, errorThrown) {
             console.log(`Status: ${xhr.status}`);
         }
