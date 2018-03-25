@@ -44,10 +44,10 @@ main {
     top: 0;
     left: 0;
     padding: 15px;
-    box-sizing: border-box;    
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;    
+    justify-content: space-between;
     width: inherit;
     height: inherit;
 }
@@ -128,4 +128,12 @@ main {
 
 .login-field::placeholder {
     opacity: 0.5;
+}
+
+#major {
+  display: none;
+}
+
+#position {
+  display: none;
 }

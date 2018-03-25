@@ -1,16 +1,4 @@
 function uploadBook() {
-    var email;
-
-    $.ajax({
-        url: "/getSession",
-        dataType: "json",
-        type: "GET",
-        contentType: "application/json"
-    }, function(data) {
-        email = data.email;
-    });
-    console.log(email);
-
     var form = document.getElementById("login-form");
     var book = {
         ownerLangaraId: form.ownerlangaraid.value,

@@ -23,3 +23,17 @@ function submitRegistration() {
         }
     });
 }
+
+function showMajor() {
+  var major = document.getElementById("major");
+  var pos = document.getElementById("position");
+  major.style.display = "block";
+  pos.style.display = "none";
+}
+
+function showPosition() {
+  var major = document.getElementById("major");
+  var pos = document.getElementById("position");
+  pos.style.display = "block";
+  major.style.display = "none";
+}
