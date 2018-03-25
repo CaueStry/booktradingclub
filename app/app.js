@@ -7,6 +7,22 @@ var path = require("path");
 var session = require("express-session");
 var queries = require("./custom_modules/queries.js");
 
+// req.path.indexOf is necessary because routes might be /login or /login/
+// and it will generate an infinite loop if you don't check it.
+const aclSession = (req, res, next) => {
+  const sess = req.session;
+
+  if (!sess.email && req.path.indexOf('/login') < 0) {
+    return res.redirect('/login');
+  }
+
+  if (sess.email && req.path.indexOf('/login') >= 0) {
+    return res.redirect('/dashboard');
+  }
+
+  next();
+}
+
 // Middleware
 var app = express();
 app.use(bodyParser.json());
@@ -39,15 +55,8 @@ app.use("/login", express.static(path.join(__dirname, "public", "login")));
 app.use("/register", express.static(path.join(__dirname, "public", "registration")));
 app.use("/dashboard", express.static(path.join(__dirname, "public", "dashboard")));
 
-//Routing
-app.get("/", function(req, res) {
-    sess = req.session;
-    if(sess.email) {
-        res.redirect("/dashboard");
-    } else {
-        res.redirect("/login");
-    }
-});
+// Access Control List (ACL) Middleware
+app.use(aclSession)
 
 app.get("/getSession", function(req, res) {
     sess = req.session;
