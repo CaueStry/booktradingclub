@@ -20,7 +20,7 @@ CREATE TABLE SYS_User (
 langara_id INTEGER,
 first_name CHAR(50), 
 last_name CHAR(50), 
-email CHAR(100) NOT NULL,
+email CHAR(100) NOT NULL UNIQUE,
 upassword CHAR(255) NOT NULL,
 salt CHAR(255) NOT NULL,
 role_id CHAR(1) DEFAULT 'U',
