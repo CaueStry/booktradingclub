@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BTC - Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Dosis|Roboto" rel="stylesheet">
+    <link href="/public/stylesheets/login.css" rel="stylesheet">
+    <link href="/public/stylesheets/register.css" rel="stylesheet">        
+    <script src="/public/javascripts/jquery.js"></script>
+    <script src="/public/javascripts/register.js"></script>
+</head>
+<body>
+    <main>
+        <span class="page-title">Book Trading Club</span>
+        <span class="page-subtitle">Sign Up</span>
+        <div id="login-container">
+            <div id="login-box"></div>
+            <form id="login-form" action="javascript:register()">
+                <input class="login-field" type="text" name="email" placeholder ="E-mail">
+                <input class="login-field" type="text" name="firstname" placeholder="First Name">
+                <input class="login-field" type="text" name="lastname" placeholder="Last Name">
+                <input class="login-field" type="text" name="langaraid" placeholder="Langara ID">
+                <input class="login-field" type="password" name="password" placeholder="Password">
+                <div id="types-container">
+                    <span>
+                        <input class="type-radio" type="radio" name="type" value="student" onclick="showMajor()">
+                        <span class="type-name">Student</span>
+                    </span>
+                    <span>
+                        <input class="type-radio" type="radio" name="type" value="staff" onclick="showPosition()">
+                        <span class="type-name">Staff</span>
+                    </span>
+                </div>
+                <input id="major" class="login-field" type="text" name="major" placeholder="Major">
+                <input id="position" class="login-field" type="text" name="position" placeholder="Job Title">
+                <div id="login-buttons-container">
+                    <a href="/" class="login-button">Back to Login</a>
+                    <input class="login-button" type="submit" name="register" value="Register">
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
