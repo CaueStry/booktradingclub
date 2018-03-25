@@ -50,13 +50,13 @@ con.connect(function(err) {
     if(err) throw err;
 });
 
+// Access Control List (ACL) Middleware
+app.use(aclSession)
+
 // Paths
 app.use("/login", express.static(path.join(__dirname, "public", "login")));
 app.use("/register", express.static(path.join(__dirname, "public", "registration")));
 app.use("/dashboard", express.static(path.join(__dirname, "public", "dashboard")));
-
-// Access Control List (ACL) Middleware
-app.use(aclSession)
 
 app.get("/getSession", function(req, res) {
     sess = req.session;
