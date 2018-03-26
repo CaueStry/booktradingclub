@@ -63,6 +63,29 @@ app.get('/dashboard', function(req, res) {
     });
 });
 
+app.get('/dashboard/mybooks', function(req, res) {
+    books.myBooks(con, req.session.email, function(result) {
+        res.render('mybooks', {
+            books: result
+        });
+    });
+});
+
+app.get('/dashboard/uploadBook', function(req, res) {
+    res.render('uploadBook');
+});
+
+app.delete('/dashboard/mybooks', function(req, res) {
+    books.deleteBook(con, req.body.id, function(err) {
+        if(err) {
+            res.status(400).end();
+        } else {
+            // TODO: Send E-mail
+            res.status(200).end();
+        }
+    });
+});
+
 app.post('/login', function(req, res) {
     auth.authUser(req.body, con, function(response) {
         if(response) {
@@ -70,6 +93,16 @@ app.post('/login', function(req, res) {
             res.status(200).end();
         } else {
             res.status(401).end();
+        }
+    });
+});
+
+app.post('/dashboard/uploadBook', function(req, res) {
+    books.uploadBook(con, req.session.email, req.body, function(err) {
+        if(err) {
+            res.status(400).end();
+        } else {
+            res.status(200).end();
         }
     });
 });
@@ -88,7 +121,6 @@ app.post('/register', function(req, res) {
 app.put('/dashboard', function(req, res) {
     books.requestBook(con, req.session.email, req.body.id, function(err) {
         if(err) {
-            alert("Your request could not be processed.");
             res.status(400).end();
         } else {
             // TODO: Send E-mail
