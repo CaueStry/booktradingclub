@@ -86,11 +86,13 @@ app.post('/register', function(req, res) {
 });
 
 app.put('/dashboard', function(req, res) {
-    books.requestBooks(con, req.session.email, function(err) {
+    books.requestBook(con, req.session.email, req.body.id, function(err) {
         if(err) {
             alert("Your request could not be processed.");
+            res.status(400).end();
         } else {
-            
+            // TODO: Send E-mail
+            res.status(200).end();
         }
     });
 });

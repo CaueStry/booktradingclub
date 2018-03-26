@@ -9,13 +9,17 @@ function featuredBooks(con, num, callback) {
     });
 }
 
-function requestBook(con, email, callback) {
-    var query = ``;
+function requestBook(con, email, id,callback) {
+    var query = `
+    UPDATE owned_copy SET requested_by_langara_id=(SELECT langara_id FROM sys_user WHERE sys_user.email='${email}')
+    WHERE copy_id = ${id} AND requested_by_langara_id IS NULL;
+    `;
     con.query(query, function(err, result, fields) {
         callback(err, result, fields);
     });
 }
 
 module.exports = {
-    featuredBooks: featuredBooks
+    featuredBooks: featuredBooks,
+    requestBook: requestBook
 }
