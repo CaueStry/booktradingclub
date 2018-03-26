@@ -1,9 +1,9 @@
-/* Remove the navbar's default margin-bottom and rounded borders */ 
+/* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
 }
-  
+
   /* Add a gray background color and some padding to the footer */
 footer {
     background-color: #f2f2f2;
@@ -36,6 +36,8 @@ footer {
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 0 20px #CCC;
+    border-radius: 6px;
+    min-height: 430px;
 }
 
 .book-img {
@@ -47,7 +49,16 @@ footer {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    flex: 2;
     margin: 0;
     text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.price {
+  font-size: 1.2em;
+  border-bottom: 1px solid #CCC;
+  padding-bottom: 5px;
 }

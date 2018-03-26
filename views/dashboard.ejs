@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/public/stylesheets/dashboard.css">  
+        <link rel="stylesheet" href="/public/stylesheets/dashboard.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="/public/javascripts/dashboard.js"></script>
@@ -18,7 +18,7 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>                        
+                      <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">Book Trading Club</a>
                   </div>
@@ -26,7 +26,7 @@
                     <ul class="nav navbar-nav">
                       <li class="active"><a href="/dashboard">Dashboard</a></li>
                       <li><a href="/dashboard/mybooks">My Books</a></li>
-                      <li><a href="/dashboard/requests">Requests</a></li>     
+                      <li><a href="/dashboard/requests">Requests</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                       <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
@@ -34,14 +34,14 @@
                   </div>
                 </div>
               </nav>
-              
+
               <div class="jumbotron dashboard-title">
                 <div class="container text-center">
-                  <h1>Dashboard</h1>      
+                  <h1>Dashboard</h1>
                   <p></p>
                 </div>
               </div>
-              
+
               <div id="books-container">
                 <% var currentBook = 0; %>
                 <% for(var i = 0; i < Math.floor(books.length / 4); i++) { %>
@@ -49,17 +49,22 @@
                     <% for(var j = 0; j < 4; j++) { %>
                         <div class="col-sm-3 book-container" id="<%= books[currentBook].copy %>">
                         <img src="<%= books[currentBook].bUrl %>" class="img-responsive book-img" style="width:100%" alt="Image">
-                        <p class="book-title"><%=books[currentBook].title%></p>
+                        <h3 class="book-title"><%=books[currentBook].title%></h3>
+                        <h4 class="text-center"><%=books[currentBook].author%></h4>
+                        <p class="text-center price">$<%=books[currentBook].bPrice.toFixed(2)%></p>
+                        <div class="text-center">
+                          <a class="btn btn-primary" onclick="trade(<%= books[currentBook].copy %>)">Trade</a>
+                        </div>
                         <% currentBook++; %>
                         </div>
                     <% } %>
                     </div>
                 <% } %>
               </div>
-              
+
               <footer class="container-fluid text-center footer">
                 <p>Book Trading Club - Caue Pinheiro, Elian Figueiredo</p>
               </footer>
-              
+
 </body>
 </html>
