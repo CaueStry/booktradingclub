@@ -85,6 +85,16 @@ app.post('/register', function(req, res) {
     }
 });
 
+app.put('/dashboard', function(req, res) {
+    books.requestBooks(con, req.session.email, function(err) {
+        if(err) {
+            alert("Your request could not be processed.");
+        } else {
+            
+        }
+    });
+});
+
 // Listener
 app.listen(port, function() {
     console.log(`Listening on port ${port}...`);

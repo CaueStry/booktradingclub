@@ -5,8 +5,14 @@ function featuredBooks(con, num, callback) {
     `;
     con.query(query, function(err, result, fields) {
         if (err) throw err;
-        console.log(result);
         callback(result);
+    });
+}
+
+function requestBook(con, email, callback) {
+    var query = ``;
+    con.query(query, function(err, result, fields) {
+        callback(err, result, fields);
     });
 }
 
