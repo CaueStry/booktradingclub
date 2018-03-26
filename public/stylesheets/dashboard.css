@@ -11,7 +11,7 @@ footer {
 }
 
 .dashboard-title {
-    color: #FFF;
+    color: #000;
     background: url('/public/images/dashboard-books.jpg');
     background-position: center;
     background-size: 100% auto;

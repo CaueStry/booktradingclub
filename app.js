@@ -51,11 +51,14 @@ app.get('/login', function(req, res) {
 });
 
 app.get('/register', function(req, res) {
-    res.render('register');
+    res.render('register', {});
 });
 
 app.get('/dashboard', function(req, res) {
-    res.render('dashboard');
+    var books = [{name: '1', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '2', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '3', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '4', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '5', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '6', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '7', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '8', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '9', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '10', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '11', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '12', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'} ];
+    res.render('dashboard', {
+        books: books
+    });
 });
 
 app.post('/login', function(req, res) {
@@ -66,7 +69,7 @@ app.post('/login', function(req, res) {
         } else {
             res.status(401).end();
         }
-    }); 
+    });
 });
 
 app.post('/register', function(req, res) {
