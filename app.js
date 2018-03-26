@@ -6,6 +6,7 @@ var session = require('express-session');
 var mysql = require('mysql');
 
 var auth = require('./modules/auth');
+var books = require('./modules/books');
 
 var app = express();
 const port = 3000;
@@ -55,9 +56,10 @@ app.get('/register', function(req, res) {
 });
 
 app.get('/dashboard', function(req, res) {
-    var books = [{name: '1', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '2', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '3', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '4', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '5', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '6', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '7', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '8', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '9', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '10', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '11', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'}, {name: '12', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTxJ12RaysBPmtz3D5JijMzxYD5DBxEtpy6gAWmXexH8EbyFHfg'} ];
-    res.render('dashboard', {
-        books: books
+    books.featuredBooks(con, 12, function(result) {
+        res.render('dashboard', {
+            books: result
+        });
     });
 });
 

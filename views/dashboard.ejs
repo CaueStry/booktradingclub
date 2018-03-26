@@ -49,9 +49,9 @@
   <% for(var i = 0; i < Math.floor(books.length / 4); i++) { %>
   <div class="row">
     <% for(var j = 0; j < 4; j++) { %>
-    <div class="col-sm-3">
-      <p><%=books[currentBook].name%></p>
-      <img src="<%= books[currentBook].url %>" class="img-responsive" style="width:100%" alt="Image">
+    <div class="col-sm-3" id="<%= books[currentBook].copy %>">
+      <p><%=books[currentBook].title%></p>
+      <img src="<%= books[currentBook].bUrl %>" class="img-responsive" style="width:100%" alt="Image">
       <% currentBook++; %>
     </div>
     <% } %>
