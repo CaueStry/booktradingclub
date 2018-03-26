@@ -16,3 +16,36 @@ footer {
     background-position: center;
     background-size: 100% auto;
 }
+
+#books-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    height: 900px;
+}
+
+.row-container {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.book-container {
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 20px #CCC;
+}
+
+.book-img {
+    flex: 8;
+}
+
+.book-title {
+    flex: 2;
+    margin: 0;
+    text-align: center;
+}
