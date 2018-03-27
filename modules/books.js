@@ -1,4 +1,4 @@
-function featuredBooks(con, num, callback) {
+function featuredBooks(con, num, email,callback) {
     var result;
     var query = `
         SELECT * FROM ALL_AVAILABLE_BOOKS LIMIT ${num};
