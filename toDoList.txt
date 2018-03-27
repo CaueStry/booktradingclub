@@ -4,29 +4,13 @@
 * Profile
 * Email System
 
-Elian
-* Queries
-	* Selection (Book title or author)
-	* Requested by me
-	* Requested to me
-	* Profile information
-
 Caue
 * Interface
-	* Requested by me
-	* Requested to me
-	* My profile
 	* Search bar (Drop menu for author or title)
 
 
-
-
-
-
-
-
-
-
+Need to implement:
+	
 Queries:
 //Dashboard query updated:
 Not displaying books owned by user who's viwing available books.
@@ -45,25 +29,24 @@ SELECT * FROM ALL_AVAILABLE_BOOKS
 WHERE author LIKE '%${search}%'
 LIMIT ${num};
 
+//1. [1 Mark] Projection query: -- stupid AF
+Page: myProfile.ejs or create a new view like statistics.ejs
+SELECT title FROM book
 
-Requested by Me:
-SELECT OC.copy_id AS copy, OC.owner_langara_id AS bOwner, OC.requested_by_langara_id AS requestedBy, OC.book_price AS bPrice, OC.user_image_url AS bUrl, B.title, B.author
-FROM owned_copy OC INNER JOIN book B ON OC.book_id = B.isbn13
-WHERE OC.requested_by_langara_id = (SELECT langara_id FROM sys_user WHERE sys_user.email='${email}');
+//4. [1 Mark] Division query: --- I have no idea how to implement this shit. haha
 
-Requested to Me:
-SELECT OC.copy_id AS copy, OC.owner_langara_id AS bOwner, OC.requested_by_langara_id AS requestedBy, OC.book_price AS bPrice, OC.user_image_url AS bUrl, B.title, B.author
-FROM owned_copy OC INNER JOIN book B ON OC.book_id = B.isbn13
-WHERE OC.owner_langara_id = (SELECT langara_id FROM sys_user WHERE sys_user.email='${email}')
-AND OC.requested_by_langara_id IS NOT NULL;
+//5. [2 Mark] Aggregation query:
+This is linked with Query 1.
+SELECT COUNT(isbn13) FROM book;
+SELECT ROUND(AVG(book_price), 2) AS AvgAllBooks FROM owned_copy;
 
-Profile:
-SELECT langara_id, first_name, last_name, email FROM sys_user
-WHERE langara_id = (SELECT langara_id FROM sys_user WHERE sys_user.email='${email}');
-
-
-Count book and price AVG:
+//6. [1 Mark] Nested aggregation with group-by:
+Page: mybooks.ejs
 SELECT owner_langara_id, COUNT(copy_id) AS totalBooks, AVG(book_price) AS avgPrice
 FROM owned_copy
 WHERE owner_langara_id = (SELECT langara_id FROM sys_user WHERE sys_user.email='${email}')
 GROUP BY owner_langara_id;
+
+//7. [2 Marks] Delete operation: Implement a cascade-on-delete situation.
+Page: myProfile.ejs
+DELETE FROM sys_user WHERE langara_id = '${langara_id}'
