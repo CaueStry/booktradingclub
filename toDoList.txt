@@ -3,3 +3,53 @@
    ** Aprove (send email - delete tuple) / Reject (remove requested_by_langara_id from owned_copy)
 * Profile
 * Email System
+
+
+
+
+
+
+
+
+
+
+Queries:
+//Dashboard query updated:
+Not displaying books owned by user who's viwing available books.
+SELECT * FROM ALL_AVAILABLE_BOOKS
+WHERE bOwner NOT IN (SELECT langara_id FROM sys_user WHERE sys_user.email='${email}')
+LIMIT ${num};
+
+Search Queries:
+//Search by title
+SELECT * FROM ALL_AVAILABLE_BOOKS
+WHERE title LIKE '%${search}%'
+LIMIT ${num};
+
+//Search by author
+SELECT * FROM ALL_AVAILABLE_BOOKS
+WHERE author LIKE '%${search}%'
+LIMIT ${num};
+
+
+Requested by Me:
+SELECT OC.copy_id AS copy, OC.owner_langara_id AS bOwner, OC.requested_by_langara_id AS requestedBy, OC.book_price AS bPrice, OC.user_image_url AS bUrl, B.title, B.author
+FROM owned_copy OC INNER JOIN book B ON OC.book_id = B.isbn13
+WHERE OC.requested_by_langara_id = (SELECT langara_id FROM sys_user WHERE sys_user.email='${email}');
+
+Requested to Me:
+SELECT OC.copy_id AS copy, OC.owner_langara_id AS bOwner, OC.requested_by_langara_id AS requestedBy, OC.book_price AS bPrice, OC.user_image_url AS bUrl, B.title, B.author
+FROM owned_copy OC INNER JOIN book B ON OC.book_id = B.isbn13
+WHERE OC.owner_langara_id = (SELECT langara_id FROM sys_user WHERE sys_user.email='${email}')
+AND OC.requested_by_langara_id IS NOT NULL;
+
+Profile:
+SELECT langara_id, first_name, last_name, email FROM sys_user
+WHERE langara_id = (SELECT langara_id FROM sys_user WHERE sys_user.email='${email}');
+
+
+Count book and price AVG:
+SELECT owner_langara_id, COUNT(copy_id) AS totalBooks, AVG(book_price) AS avgPrice
+FROM owned_copy
+WHERE owner_langara_id = (SELECT langara_id FROM sys_user WHERE sys_user.email='${email}')
+GROUP BY owner_langara_id;
