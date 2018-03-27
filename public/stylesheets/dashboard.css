@@ -1,3 +1,7 @@
+html, body {
+    min-width: 1040px;
+}
+
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
     margin-bottom: 0;
@@ -12,6 +16,7 @@ footer {
 }
 
 .dashboard-title {
+    padding: 38px 0;
     color: #000;
     background: url('/public/images/dashboard-books.jpg');
     background-position: center;
@@ -35,10 +40,11 @@ footer {
     margin: 10px;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     justify-content: space-between;
     box-shadow: 0 0 20px #CCC;
     border-radius: 6px;
-    min-height: 430px;
+    min-height: 400px;
 }
 
 .book-img {
@@ -59,7 +65,38 @@ footer {
 }
 
 .price {
+  margin: auto;
   font-size: 1.2em;
   border-bottom: 1px solid #CCC;
   padding-bottom: 5px;
+}
+
+.empty-books {
+    height: 410px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 5em;
+}
+
+.upload-book {
+    display: block;
+    width: 150px;
+    margin: 20px auto;
+}
+
+#login-box {
+    height: 200px;
+}
+
+#login-form {
+    height: 150px;
+}
+
+#dashboard-page-title {
+    display: inline-block;
+    padding: 25px;
+    background-color: rgba(210, 210, 210, 0.5);
+    color: #000;
+    box-shadow: 0 0 20px #000;
 }

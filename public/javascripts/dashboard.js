@@ -81,3 +81,40 @@ function cancelReq(id) {
         }
     });
 }
+
+function approveReq(id) {
+    $.ajax({
+        url: '/dashboard/reqToMe',
+        type: 'DELETE',
+        data: {id: id},
+        statusCode: {
+            200: function() {
+                alert("Your request has been posted.");
+                location.reload();
+            },
+            400: function() {
+                alert("Error: The book is not available.");
+                location.reload();
+            }
+        }
+    });
+
+}
+
+function rejectReq(id) {
+    $.ajax({
+        url: '/dashboard/reqToMe',
+        type: 'PUT',
+        data: {id: id},
+        statusCode: {
+            200: function() {
+                alert("Your request has been posted.");
+                location.reload();
+            },
+            400: function() {
+                alert("Error: The book is not available.");
+                location.reload();
+            }
+        }
+    });
+}

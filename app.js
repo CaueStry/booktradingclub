@@ -7,6 +7,8 @@ var mysql = require('mysql');
 
 var auth = require('./modules/auth');
 var books = require('./modules/books');
+var profile = require('./modules/profile');
+var mails = require('./modules/mails');
 
 var app = express();
 const port = 3000;
@@ -56,7 +58,7 @@ app.get('/register', function(req, res) {
 });
 
 app.get('/dashboard', function(req, res) {
-    books.featuredBooks(con, 12, req.session.email,function(result) {
+    books.featuredBooks(con, req.session.email,function(result) {
         res.render('dashboard', {
             books: result
         });
@@ -79,33 +81,28 @@ app.get('/dashboard/reqByMe', function(req, res) {
     });
 });
 
+app.get('/dashboard/reqToMe', function(req, res) {
+    books.reqToMe(con, req.session.email, function(result) {
+        res.render('reqToMe', {
+            books: result
+        });
+    });
+});
+
 app.get('/dashboard/uploadBook', function(req, res) {
     res.render('uploadBook');
 });
 
-app.delete('/dashboard/mybooks', function(req, res) {
-    books.deleteBook(con, req.body.id, function(err) {
-        if(err) {
-            res.status(400).end();
-        } else {
-            // TODO: Send E-mail
-            res.status(200).end();
-        }
-    });
-});
-
-app.delete('/dashboard/reqByMe', function(req, res) {
-    books.cancelReq(con, req.body.id, function(err) {
-        if(err) {
-            res.status(400).end();
-        } else {
-            res.status(200).end();
-        }
+app.get('/dashboard/myProfile', function(req, res) {
+    profile.getMyProfile(con, req.session.email, function(user) {
+        res.render('myProfile', {
+            user: user
+        });
     });
 });
 
 app.post('/login', function(req, res) {
-    auth.authUser(req.body, con, function(response) {
+    auth.authUser(req.body, con, function(err, response) {
         if(response) {
             req.session.email = req.body.email;
             res.status(200).end();
@@ -141,8 +138,54 @@ app.put('/dashboard', function(req, res) {
         if(err) {
             res.status(400).end();
         } else {
-            // TODO: Send E-mail
             res.status(200).end();
+        }
+    });
+});
+
+app.put('/dashboard/reqToMe', function(req, res) {
+    books.cancelReq(con, req.body.id, function(err) {
+        if(err) {
+            res.status(400).end();
+        } else {
+            res.status(200).end();
+        }
+    });
+});
+
+app.delete('/dashboard/mybooks', function(req, res) {
+    books.deleteBook(con, req.body.id, function(err) {
+        if(err) {
+            res.status(400).end();
+        } else {
+            res.status(200).end();
+        }
+    });
+});
+
+app.delete('/dashboard/reqByMe', function(req, res) {
+    books.cancelReq(con, req.body.id, function(err) {
+        if(err) {
+            res.status(400).end();
+        } else {
+            res.status(200).end();
+        }
+    });
+});
+
+app.delete('/dashboard/reqToMe', function(req, res) {
+    books.approveRequest(con, req.body.id, function(err, result) {
+        mails.requestApproved(result);
+        if(err) {
+            res.status(400).end();
+        } else {
+            books.deleteBook(con, req.body.id, function(err, result) {
+                if(err) {
+                    res.status(400).end();
+                } else {
+                    res.status(200).end();
+                }
+            });
         }
     });
 });

@@ -8,13 +8,12 @@ function authUser(user, con, callback) {
         WHERE email = '${user.email}';
     `;
     con.query(query, function(err, result, fields) {
-        if (err) throw err;
-        if(checkPassword(user.password, result[0].upassword, result[0].salt)) {
+        if(result.length > 0 && checkPassword(user.password, result[0].upassword, result[0].salt)) {
             response = true;
         } else {
             response = false;
         }
-        callback(response);
+        callback(err, response);
     });
 }
 

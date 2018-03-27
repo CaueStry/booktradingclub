@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>BTC - Dashboard</title>
+        <title>BTC - My Books</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                <link rel="stylesheet" href="/public/stylesheets/upload.css">
         <link rel="stylesheet" href="/public/stylesheets/dashboard.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -24,11 +25,11 @@
                   </div>
                   <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                      <li class="active"><a href="/dashboard">Dashboard</a></li>
+                      <li><a href="/dashboard">Dashboard</a></li>
                       <li><a href="/dashboard/mybooks">My Books</a></li>
                       <li><a href="/dashboard/reqByMe">Requested by Me</a></li>
                       <li><a href="/dashboard/reqToMe">Requested to Me</a></li>
-                      <li><a href="/dashboard/myProfile">My Profile</a></li>
+                      <li class="active"><a href="/dashboard/myProfile">My Profile</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                       <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
@@ -39,36 +40,22 @@
 
               <div class="jumbotron dashboard-title">
                 <div class="container text-center">
-                  <h1 id="dashboard-page-title">Dashboard</h1>
-                  <p></p>
+                  <h1 id="dashboard-page-title"><%= user.first_name %> <%= user.last_name %></h1>
                 </div>
               </div>
 
-             <div id="books-container">
-                <% var count = 0; %>
-                <% if(books.length <= 0) { %>
-                  <div class="text-center empty-books">Sorry, no books here! :(</div>
-                <% } %>
-                <div class="row row-container">
-                    <% books.forEach(function(book, i) { %>
-                        <div class="col-sm-3 book-container" id="<%= book.copy %>">
-                        <img src="<%= book.bUrl %>" class="img-responsive book-img" style="width:100%" alt="Image">
-                        <h3 class="book-title"><%=book.title%></h3>
-                        <h4 class="text-center"><%=book.author%></h4>
-                        <p class="text-center price">$<%=book.bPrice.toFixed(2)%></p>
-                        <div class="text-center">
-                            <a class="btn btn-primary" onclick="trade(<%= book.copy %>)">Trade</a>
-                        </div>
-                        </div>
-                        <% count++; %>
-                        <% if(count == 5) { %>
-                            </div>
-                            <div class="row row-container">
-                            <% count = 0; %>
-                        <% } %>
-                    <% }); %>
+              <!-- Page Features -->
+              <div class="rowup text-center">
+                <div id="login-container">
+                    <div id="login-box"></div>
+                    <form id="login-form" action="">
+                        <span class="profile-label">First Name: <%= user.first_name %></span>
+                        <span class="profile-label">Last Name: <%= user.last_name %></span>
+                        <span class="profile-label">E-mail: <%= user.email %></span>
+                        <span class="profile-label">Langara ID:  <%= user.langara_id %></span>
+                    </form>
                 </div>
-            </div>
+              </div>
 
               <footer class="container-fluid text-center footer">
                 <p>Copyright © Book Trading Club 2018</p>

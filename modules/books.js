@@ -1,7 +1,8 @@
-function featuredBooks(con, num, email,callback) {
+function featuredBooks(con, email,callback) {
     var result;
     var query = `
-        SELECT * FROM ALL_AVAILABLE_BOOKS LIMIT ${num};
+        SELECT * FROM ALL_AVAILABLE_BOOKS 
+        WHERE bOwner NOT IN (SELECT langara_id FROM SYS_User WHERE email = '${email}');
     `;
     con.query(query, function(err, result, fields) {
         if (err) throw err;
@@ -38,6 +39,33 @@ function deleteBook(con, id, callback) {
     `;
     con.query(query, function(err, result, fields) {
         callback(err, result, fields);
+    });
+}
+
+function approveRequest(con, id, callback) {
+    var info = [];
+    var errs;
+    var query = `
+    SELECT u.email AS email FROM SYS_User u INNER JOIN owned_copy oc ON u.langara_id = oc.owner_langara_id WHERE oc.copy_id = ${id};
+    `;
+    con.query(query, function(err, result) {
+        info.push(result[0].email);
+        if (err) errs = err;
+    });
+    var query = `
+    SELECT u.email AS email FROM SYS_User u INNER JOIN owned_copy oc ON u.langara_id = oc.requested_by_langara_id WHERE oc.copy_id = ${id};
+    `;
+    con.query(query, function(err, result) {
+        info.push(result[0].email);
+        if (err) errs = err;      
+    });
+    var query = `
+    SELECT b.title AS title FROM book b INNER JOIN owned_copy oc ON oc.book_id = b.isbn13 WHERE oc.copy_id = ${id};
+    `;
+    con.query(query, function(err, result, fields) {
+        info.push(result[0].title);
+        if (err) errs = err;       
+        callback(errs, info);
     });
 }
 
@@ -79,6 +107,20 @@ function reqByMe(con, email, callback) {
     });
 }
 
+function reqToMe(con, email, callback) {
+    var result;
+    var query = `
+    SELECT OC.copy_id AS copy, OC.owner_langara_id AS bOwner, OC.requested_by_langara_id AS requestedBy, OC.book_price AS bPrice, OC.user_image_url AS bUrl, B.title, B.author
+    FROM owned_copy OC INNER JOIN book B ON OC.book_id = B.isbn13
+    WHERE OC.owner_langara_id IN (SELECT langara_id FROM sys_user WHERE sys_user.email='${email}')
+    AND OC.requested_by_langara_id IS NOT NULL;
+    `;
+    con.query(query, function(err, result, fields) {
+        if (err) throw err;
+        callback(result);
+    });
+}
+
 function cancelReq(con, id, callback) {
     var query = `
     UPDATE owned_copy SET requested_by_langara_id=NULL WHERE copy_id=${id};
@@ -95,5 +137,7 @@ module.exports = {
     deleteBook: deleteBook,
     uploadBook: uploadBook,
     reqByMe: reqByMe,
-    cancelReq: cancelReq
+    cancelReq: cancelReq,
+    reqToMe: reqToMe,
+    approveRequest: approveRequest
 }
