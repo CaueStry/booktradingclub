@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>BTC - Requested By Me</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/public/stylesheets/dashboard.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="/public/javascripts/dashboard.js"></script>
+</head>
+<body>
+
+        <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Book Trading Club</a>
+                  </div>
+                  <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                      <li class="active"><a href="/dashboard">Dashboard</a></li>
+                      <li><a href="/dashboard/mybooks">My Books</a></li>
+                      <li><a href="/dashboard/reqByMe">Requested by Me</a></li>
+                      <li><a href="/dashboard/reqToMe">Requested to Me</a></li>
+                      <li><a href="/dashboard/profile">My Profile</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+
+              <div class="jumbotron dashboard-title">
+                <div class="container text-center">
+                  <h1>Requested By Me</h1>
+                </div>
+              </div>
+
+              <div id="books-container">
+                 <% var count = 0; %>
+                 <div class="row row-container">
+                     <% books.forEach(function(book, i) { %>
+                         <div class="col-sm-3 book-container" id="<%= book.copy %>">
+                         <img src="<%= book.bUrl %>" class="img-responsive book-img" style="width:100%" alt="Image">
+                         <h3 class="book-title"><%=book.title%></h3>
+                         <h4 class="text-center"><%=book.author%></h4>
+                         <p class="text-center price">$<%=book.bPrice.toFixed(2)%></p>
+                         <div class="text-center">
+                             <a class="btn btn-primary" onclick="cancelReq(<%= book.copy %>)">Cancel</a>
+                         </div>
+                         </div>
+                         <% count++; %>
+                         <% if(count == 4) { %>
+                             </div>
+                             <div class="row row-container">
+                             <% count = 0; %>
+                         <% } %>
+                     <% }); %>
+                 </div>
+             </div>
+
+              <footer class="container-fluid text-center footer">
+                <p>Copyright © Book Trading Club 2018</p>
+              </footer>
+
+</body>
+</html>

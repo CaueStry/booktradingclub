@@ -66,10 +66,34 @@ function uploadBook(con, email, book, callback) {
     });
 }
 
+function reqByMe(con, email, callback) {
+    var result;
+    var query = `
+    SELECT OC.copy_id AS copy, OC.owner_langara_id AS bOwner, OC.requested_by_langara_id AS requestedBy, OC.book_price AS bPrice, OC.user_image_url AS bUrl, B.title, B.author
+      FROM owned_copy OC INNER JOIN book B ON OC.book_id = B.isbn13
+      WHERE OC.requested_by_langara_id = (SELECT langara_id FROM sys_user WHERE sys_user.email='${email}');
+    `;
+    con.query(query, function(err, result, fields) {
+        if (err) throw err;
+        callback(result);
+    });
+}
+
+function cancelReq(con, id, callback) {
+    var query = `
+    UPDATE owned_copy SET requested_by_langara_id=NULL WHERE copy_id=${id};
+    `;
+    con.query(query, function(err, result, fields) {
+        callback(err, result, fields);
+    });
+}
+
 module.exports = {
     featuredBooks: featuredBooks,
     requestBook: requestBook,
     myBooks: myBooks,
     deleteBook: deleteBook,
-    uploadBook: uploadBook
+    uploadBook: uploadBook,
+    reqByMe: reqByMe,
+    cancelReq: cancelReq
 }

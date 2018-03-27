@@ -15,6 +15,7 @@ function trade(id) {
         }
     });
 }
+
 function deleteBook(id) {
     $.ajax({
         url: '/dashboard/mybooks',
@@ -57,6 +58,24 @@ function uploadBook() {
             },
             400: function() {
                 alert("Error: unable to upload.");
+                location.reload();
+            }
+        }
+    });
+}
+
+function cancelReq(id) {
+    $.ajax({
+        url: '/dashboard/reqByMe',
+        type: 'DELETE',
+        data: {id: id},
+        statusCode: {
+            200: function() {
+                alert("Your request has been canceled.");
+                location.reload();
+            },
+            400: function() {
+                alert("Error: unable to cancel request.");
                 location.reload();
             }
         }

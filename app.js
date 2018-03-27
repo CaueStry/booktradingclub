@@ -71,6 +71,14 @@ app.get('/dashboard/mybooks', function(req, res) {
     });
 });
 
+app.get('/dashboard/reqByMe', function(req, res) {
+    books.reqByMe(con, req.session.email, function(result) {
+        res.render('reqByMe', {
+            books: result
+        });
+    });
+});
+
 app.get('/dashboard/uploadBook', function(req, res) {
     res.render('uploadBook');
 });
@@ -81,6 +89,16 @@ app.delete('/dashboard/mybooks', function(req, res) {
             res.status(400).end();
         } else {
             // TODO: Send E-mail
+            res.status(200).end();
+        }
+    });
+});
+
+app.delete('/dashboard/reqByMe', function(req, res) {
+    books.cancelReq(con, req.body.id, function(err) {
+        if(err) {
+            res.status(400).end();
+        } else {
             res.status(200).end();
         }
     });
