@@ -1,8 +1,22 @@
 * Books Requested By Me
 * Books Requested To Me
-   ** Aprove (send email - delete tuple) / Reject (remove requested_by_langara_id from owned_copy)
+   ** Approve (send email - delete tuple) / Reject (remove requested_by_langara_id from owned_copy)
 * Profile
 * Email System
+
+Elian
+* Queries
+	* Selection (Book title or author)
+	* Requested by me
+	* Requested to me
+	* Profile information
+
+Caue
+* Interface
+	* Requested by me
+	* Requested to me
+	* My profile
+	* Search bar (Drop menu for author or title)
 
 
 

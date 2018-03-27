@@ -56,7 +56,7 @@ app.get('/register', function(req, res) {
 });
 
 app.get('/dashboard', function(req, res) {
-    books.featuredBooks(con, 12, function(result) {
+    books.featuredBooks(con, 12, req.session.email,function(result) {
         res.render('dashboard', {
             books: result
         });
