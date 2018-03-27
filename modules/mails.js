@@ -19,7 +19,7 @@ function requestApproved(info) {
     mailOptions = {
         from: 'mail.booktradingclub@gmail.com',
         to: info[0],
-        subject: `The information about your request approval for the book "${info[2]}".`,
+        subject: `Your approved request for the book "${info[2]}".`,
         text: `Your approval for your book "${info[2]}" was successfull! Contact the buyer on the following e-mail: ${info[1]}`
     }
     mail.sendMail(mailOptions);
