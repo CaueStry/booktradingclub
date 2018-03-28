@@ -85,10 +85,6 @@ footer {
     margin: 20px auto;
 }
 
-#login-box {
-    height: 200px;
-}
-
 #login-form {
     height: 150px;
 }
@@ -99,4 +95,8 @@ footer {
     background-color: rgba(210, 210, 210, 0.5);
     color: #000;
     box-shadow: 0 0 20px #000;
+}
+
+#deleteAccountConfirm {
+    display: none;
 }

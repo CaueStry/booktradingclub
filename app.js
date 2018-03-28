@@ -96,7 +96,8 @@ app.get('/dashboard/uploadBook', function(req, res) {
 app.get('/dashboard/myProfile', function(req, res) {
     profile.getMyProfile(con, req.session.email, function(user) {
         res.render('myProfile', {
-            user: user
+            user: user.personal,
+            books: user.books
         });
     });
 });
@@ -186,6 +187,17 @@ app.delete('/dashboard/reqToMe', function(req, res) {
                     res.status(200).end();
                 }
             });
+        }
+    });
+});
+
+app.delete('/dashboard/myProfile', function(req, res) {
+    profile.deleteAccount(con, req.session.email, function(err, result) {
+        if(err) {
+            res.status(400).end();
+        } else {
+            req.session.destroy();
+            res.status(200).end();
         }
     });
 });

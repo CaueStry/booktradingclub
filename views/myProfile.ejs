@@ -52,7 +52,15 @@
                         <span class="profile-label">First Name: <%= user.first_name %></span>
                         <span class="profile-label">Last Name: <%= user.last_name %></span>
                         <span class="profile-label">E-mail: <%= user.email %></span>
-                        <span class="profile-label">Langara ID:  <%= user.langara_id %></span>
+                        <span class="profile-label">Langara ID: <%= user.langara_id %></span><br>
+                        <span class="profile-label">Requestable Books: </span>
+                        <% if(books) { %>   
+                          <% books.forEach(function(book, res) { %>
+                            <span class="profile-label">    <%= book.title %></span>
+                          <% }); %>
+                        <% } %>
+                        <a id="deleteAccountClick" class="btn btn-primary" onclick="deleteAccountClick()">Delete Account</a>
+                        <a id="deleteAccountConfirm" class="btn btn-primary" onclick="deleteAccountConfirm()">Are you sure?</a>                        
                     </form>
                 </div>
               </div>

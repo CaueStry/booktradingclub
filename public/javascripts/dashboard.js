@@ -118,3 +118,27 @@ function rejectReq(id) {
         }
     });
 }
+
+function deleteAccountClick() {
+    var click = document.getElementById("deleteAccountClick");
+    var confirm = document.getElementById("deleteAccountConfirm");
+    click.style.display = "none";
+    confirm.style.display = "block";
+  }
+  
+function deleteAccountConfirm() {
+    $.ajax({
+        url: '/dashboard/myProfile',
+        type: 'DELETE',
+        statusCode: {
+            200: function() {
+                alert("Your account has been deleted.");
+                window.location = '/login';
+            },
+            400: function() {
+                alert("Error: Couldn't delete your account.");
+                location.reload();
+            }
+        }
+    });
+}
