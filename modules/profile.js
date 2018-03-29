@@ -21,6 +21,8 @@ function getMyProfile(con, email, callback) {
 function deleteAccount(con, email, callback) {
     var query = `
     DELETE FROM sys_user WHERE email = '${email}';
+    DELETE FROM student WHERE langara_id IN (SELECT langara_id FROM sys_user WHERE email = '${email}');
+    DELETE FROM staff WHERE langara_id IN (SELECT langara_id FROM sys_user WHERE email = '${email}');
     `;
     con.query(query, function(err, result, fields) {
         callback(err);

@@ -84,6 +84,7 @@ FOREIGN KEY (owner_langara_id) REFERENCES SYS_User(langara_id)
 ON DELETE CASCADE,
 FOREIGN KEY (book_id) REFERENCES Book(isbn13),
 FOREIGN KEY (requested_by_langara_id) REFERENCES SYS_User(langara_id)
+ON DELETE CASCADE
 );
 
 /*

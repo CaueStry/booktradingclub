@@ -10,7 +10,7 @@ html, body {
 
   /* Add a gray background color and some padding to the footer */
 footer {
-    background-color: #222222;;
+    background-color: #222222;
     padding: 15px;
     color: #FFF;
 }
@@ -24,31 +24,23 @@ footer {
 }
 
 #books-container {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
-
-.row-container {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
 }
 
 .book-container {
+    width: inherit;
     padding: 10px;
     margin: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
+    display: grid;
+    grid-template-rows: 7fr 2fr 1fr 1fr 1fr;
     box-shadow: 0 0 20px #CCC;
     border-radius: 6px;
-    min-height: 400px;
 }
 
 .book-img {
-    flex: 8;
+    max-height: 100%;
+    width: auto;
 }
 
 .book-title {

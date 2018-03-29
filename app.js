@@ -32,7 +32,8 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "btc",
     password: "cpsc2221",
-    database: "booktradingclub"
+    database: "booktradingclub",
+    multipleStatements: true
 })
 con.connect(function(err) {
     try {
@@ -195,6 +196,7 @@ app.delete('/dashboard/reqToMe', function(req, res) {
 app.delete('/dashboard/myProfile', function(req, res) {
     profile.deleteAccount(con, req.session.email, function(err, result) {
         if(err) {
+            console.log(err);
             res.status(400).end();
         } else {
             req.session.destroy();
