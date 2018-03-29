@@ -37,7 +37,6 @@ function myBooks(con, email, callback) {
           GROUP BY owner_langara_id;
         `;
         con.query(query, function(err, result, fields) {
-            console.log("*****data****" + result);
             bookData.data = result;
             callback(bookData);
         });
