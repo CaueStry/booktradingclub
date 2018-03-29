@@ -1,7 +1,7 @@
 function featuredBooks(con, email,callback) {
     var result;
     var query = `
-        SELECT * FROM ALL_AVAILABLE_BOOKS 
+        SELECT * FROM ALL_AVAILABLE_BOOKS
         WHERE bOwner NOT IN (SELECT langara_id FROM SYS_User WHERE email = '${email}');
     `;
     con.query(query, function(err, result, fields) {
@@ -21,7 +21,7 @@ function requestBook(con, email, id,callback) {
 }
 
 function myBooks(con, email, callback) {
-    var result;
+    var bookData = {mybooks: [], data: []};
     var query = `
     SELECT OC.copy_id AS copy, OC.owner_langara_id AS bOwner, OC.book_price AS bPrice, OC.user_image_url AS bUrl, B.title, B.author
       FROM owned_copy OC INNER JOIN book B ON OC.book_id = B.isbn13
@@ -29,7 +29,18 @@ function myBooks(con, email, callback) {
     `;
     con.query(query, function(err, result, fields) {
         if (err) throw err;
-        callback(result);
+        bookData.mybooks = result;
+        query = `
+        SELECT owner_langara_id, COUNT(copy_id) AS totalBooks, AVG(book_price) AS avgPrice
+          FROM owned_copy
+          WHERE owner_langara_id = (SELECT langara_id FROM sys_user WHERE sys_user.email='${email}')
+          GROUP BY owner_langara_id;
+        `;
+        con.query(query, function(err, result, fields) {
+            console.log("*****data****" + result);
+            bookData.data = result;
+            callback(bookData);
+        });
     });
 }
 
@@ -57,14 +68,14 @@ function approveRequest(con, id, callback) {
     `;
     con.query(query, function(err, result) {
         info.push(result[0].email);
-        if (err) errs = err;      
+        if (err) errs = err;
     });
     var query = `
     SELECT b.title AS title FROM book b INNER JOIN owned_copy oc ON oc.book_id = b.isbn13 WHERE oc.copy_id = ${id};
     `;
     con.query(query, function(err, result, fields) {
         info.push(result[0].title);
-        if (err) errs = err;       
+        if (err) errs = err;
         callback(errs, info);
     });
 }

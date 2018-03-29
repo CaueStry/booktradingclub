@@ -66,9 +66,10 @@ app.get('/dashboard', function(req, res) {
 });
 
 app.get('/dashboard/mybooks', function(req, res) {
-    books.myBooks(con, req.session.email, function(result) {
+    books.myBooks(con, req.session.email, function(bookData) {
         res.render('mybooks', {
-            books: result
+            books: bookData.mybooks,
+            data: bookData.data
         });
     });
 });
