@@ -24,7 +24,7 @@ main {
     width: 350px;
     height: 500px;
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 #login-box {
@@ -33,7 +33,7 @@ main {
     left: 0;
     background-color: #FFF;
     width: inherit;
-    height: inherit;
+    height: 105%;
     border-radius: 10px;
     opacity: 0.95;
     box-shadow: 0 0 15px #000;

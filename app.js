@@ -99,7 +99,8 @@ app.get('/dashboard/myProfile', function(req, res) {
     profile.getMyProfile(con, req.session.email, function(user) {
         res.render('myProfile', {
             user: user.personal,
-            books: user.books
+            books: user.books,
+            stats: user.stats
         });
     });
 });
