@@ -1,5 +1,5 @@
 html, body {
-    min-width: 1040px;
+    min-width: 1200px;
 }
 
 /* Remove the navbar's default margin-bottom and rounded borders */
@@ -25,7 +25,7 @@ footer {
 
 #books-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .book-container {
@@ -33,18 +33,17 @@ footer {
     padding: 10px;
     margin: 10px;
     display: grid;
-    grid-template-rows: 7fr 2fr 1fr 1fr 1fr;
+    grid-template-rows: 350px 80px 35px 35px 35px;
     box-shadow: 0 0 20px #CCC;
     border-radius: 6px;
 }
 
 .book-img {
-    max-height: 100%;
+    height: 100%;
     width: auto;
 }
 
 .book-title {
-    padding-top: 10px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -66,7 +65,6 @@ footer {
   margin: auto;
   font-size: 1.2em;
   border-bottom: 1px solid #CCC;
-  padding-bottom: 5px;
 }
 
 .empty-books {
@@ -106,4 +104,23 @@ footer {
 
 #deleteAccountConfirm {
     display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    html, body {
+        min-width: 0px;
+    }
+    #books-container {
+        grid-template-columns: repeat(1, 1fr);
+        width: 320px;
+        margin: auto;
+    }
+    .book-container {
+        width: auto;
+    }
+    #dashboard-page-data {
+        box-sizing: border-box;
+        max-width: 350px;
+        display: block;
+    }
 }
