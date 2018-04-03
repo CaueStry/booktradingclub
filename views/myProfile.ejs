@@ -84,7 +84,7 @@
         <a id="deleteAccountConfirm" class="btn btn-primary" onclick="deleteAccountConfirm()">Are you sure?</a>
         <br>
         <span class="profile-label"><big><b><u>WebSite Statistics:</u></b></big></span>
-        <span class="profile-label"><u>All Books: </u></span>
+        <span class="profile-label"><u>My not-requested books: </u></span>
         <% if(books) { %>
           <% books.forEach(function(book, res) { %>
             <span class="profile-label">
@@ -92,7 +92,7 @@
             </span>
           <% }); %>
         <% } %>
-        <span class="profile-label"><u>Total Books:</u><%= stats[0].allBooks %></span>
+        <span class="profile-label"><u>Total Books on the website:</u><%= stats[0].allBooks %></span>
         <span class="profile-label"><u>Average Price:</u><%= stats[1].allBooks %></span>
         <br>
       </form>

@@ -118,7 +118,7 @@ INSERT INTO staff (langara_id, position) VALUES ('100290997', 'Teacher');
 INSERT INTO staff (langara_id, position) VALUES ('100578485', 'Nurse');
 INSERT INTO staff (langara_id, position) VALUES ('100123456', 'Teaching Assistant');
 
-INSERT INTO book (isbn13, title, edition, author) VALUES (9780134322759, 'Web Development & Design Foundations With HTML5', '8th Edition', 'Terry Felke-Morris');
+/*INSERT INTO book (isbn13, title, edition, author) VALUES (9780134322759, 'Web Development & Design Foundations With HTML5', '8th Edition', 'Terry Felke-Morris');*/
 INSERT INTO book (isbn13, title, edition, author) VALUES (9781305090941, 'Networking', '7th Edition', 'Jill West');
 INSERT INTO book (isbn13, title, edition, author) VALUES (9780321812520, 'Modern JavaScript Develop and Design', NULL, 'Larry Ullman');
 INSERT INTO book (isbn13, title, edition, author) VALUES (9780134583266, 'Business Essentials', '8th Canadian Edition', 'Ronald J. Ebert');
@@ -131,7 +131,7 @@ INSERT INTO book (isbn13, title, edition, author) VALUES (9787513806190, 'Contem
 INSERT INTO book (isbn13, title, edition, author) VALUES (9781305664791, 'Operations Management 6', '1st Edition', 'David Alan Collier');
 INSERT INTO book (isbn13, title, edition, author) VALUES (9781576810453, 'Lean Enterprise Memory Jogger', '1st Edition', 'Richard L. MacInnes');
 
-INSERT INTO owned_copy (owner_langara_id, book_id, requested_by_langara_id, book_condition, book_price, user_image_url, description) VALUES (100290512, 9780134322759, 100123456, 'Used', 100, 'http://www-fp.pearsonhighered.com/assets/hip/images/bigcovers/0134322754.jpg', 'book used on CPSC 1030');
+/*INSERT INTO owned_copy (owner_langara_id, book_id, requested_by_langara_id, book_condition, book_price, user_image_url, description) VALUES (100290512, 9780134322759, 100123456, 'Used', 100, 'http://www-fp.pearsonhighered.com/assets/hip/images/bigcovers/0134322754.jpg', 'book used on CPSC 1030');*/
 INSERT INTO owned_copy (owner_langara_id, book_id, requested_by_langara_id, book_condition, book_price, user_image_url, description) VALUES (100302918, 9781305090941, NULL, 'Used', 75, 'https://images-na.ssl-images-amazon.com/images/I/51-2VC%2BZQWL.jpg', 'book used on CPSC 1480');
 INSERT INTO owned_copy (owner_langara_id, book_id, requested_by_langara_id, book_condition, book_price, user_image_url, description) VALUES (100288803, 9780321812520, NULL, 'Used', 115, 'https://images-na.ssl-images-amazon.com/images/I/41JheV5iqgL._SX402_BO1,204,203,200_.jpg', 'book used on CPSC 1045');
 INSERT INTO owned_copy (owner_langara_id, book_id, requested_by_langara_id, book_condition, book_price, user_image_url, description) VALUES (100290513, 9780134583266, NULL, 'Used', 50, 'https://images-na.ssl-images-amazon.com/images/I/51Cn6rWchXL.jpg', 'book used on BUSM 1100');

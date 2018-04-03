@@ -22,6 +22,7 @@ function requestBook(con, email, id,callback) {
 
 function myBooks(con, email, callback) {
     var bookData = {mybooks: [], data: []};
+    // Query 3 - Join Query
     var query = `
     SELECT OC.copy_id AS copy, OC.owner_langara_id AS bOwner, OC.book_price AS bPrice, OC.user_image_url AS bUrl, B.title, B.author
       FROM owned_copy OC INNER JOIN book B ON OC.book_id = B.isbn13
@@ -30,6 +31,7 @@ function myBooks(con, email, callback) {
     con.query(query, function(err, result, fields) {
         if (err) throw err;
         bookData.mybooks = result;
+        // Query 6 - Nested Aggregation with Group by
         query = `
         SELECT owner_langara_id, COUNT(copy_id) AS totalBooks, AVG(book_price) AS avgPrice
           FROM owned_copy
@@ -132,6 +134,7 @@ function reqToMe(con, email, callback) {
 }
 
 function cancelReq(con, id, callback) {
+    // Query 8 - Update Operation
     var query = `
     UPDATE owned_copy SET requested_by_langara_id=NULL WHERE copy_id=${id};
     `;
