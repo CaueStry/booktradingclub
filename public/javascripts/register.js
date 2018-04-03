@@ -19,6 +19,9 @@ function register() {
         statusCode: {
             401: function() {
                 alert("Invalid Fields");
+            }, 
+            200: function() {
+                window.localtion = '/dashboard';
             }
         }
     });
