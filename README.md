@@ -5,7 +5,7 @@
 
 Set up the database:
 ```sh
-mysql < ./database/tables.sql -u root -p [Type your server's password]
+mysql \< ./database/tables.sql -u root -p [Type your server's password]
 ```
 
 Install/update dependencies:
