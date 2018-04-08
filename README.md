@@ -33,7 +33,7 @@ localhost:3000
 
 ## Meta
 
-Caue Pinheiro – cauehier@gmail.com
-Elian Figueiredo – elian_gaspar@hotmail.com
+* Caue Pinheiro – cauehier@gmail.com
+* Elian Figueiredo – elian_gaspar@hotmail.com
 
-Distributed under the MIT license. See ``LICENSE`` for more information.
+> Distributed under the MIT license. See ``LICENSE`` for more information.
