@@ -33,8 +33,8 @@ localhost:3000
 
 ## Authors
 
-* Caue Pinheiro – cauehier@gmail.com
-* Elian Figueiredo – elian_gaspar@hotmail.com
+* **Caue Pinheiro** – cauehier@gmail.com
+* **Elian Figueiredo** – elian_gaspar@hotmail.com
 
 ## Meta
 
