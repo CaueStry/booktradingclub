@@ -1,5 +1,5 @@
 # Book Trading Club
-> A simple book trading website
+> Simple book trading webapp made as a project for the class Database Systems at Langara College.
 
 ## Installation
 
@@ -25,15 +25,17 @@ localhost:3000
 
 ## Built With
 
-* Bootstrap
-* jQuery (AJAX Module)
 * Node.JS
 * Express.JS
 * MySQL
+* Bootstrap
+* jQuery (AJAX Module)
 
-## Meta
+## Authors
 
 * Caue Pinheiro – cauehier@gmail.com
 * Elian Figueiredo – elian_gaspar@hotmail.com
+
+## Meta
 
 > Distributed under the MIT license. See ``LICENSE`` for more information.
